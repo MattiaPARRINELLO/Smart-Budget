@@ -1,0 +1,473 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   VARIABLES CSS - Smart Budget Dark Mode
+   ============================================ */
+
+:root {
+  /* Colors Light Mode */
+  --color-bg-primary: 250 250 250;
+  --color-bg-secondary: 255 255 255;
+  --color-bg-tertiary: 244 244 245;
+  --color-text-primary: 24 24 27;
+  --color-text-secondary: 82 82 91;
+  --color-text-muted: 161 161 170;
+  --color-border: 228 228 231;
+  --color-border-muted: 244 244 245;
+  
+  /* Brand colors */
+  --color-primary: 14 165 233;
+  --color-accent: 217 70 239;
+  --color-success: 16 185 129;
+  --color-warning: 245 158 11;
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-display: 'Cabinet Grotesk', 'Inter', system-ui, sans-serif;
+  
+  /* Spacing */
+  --header-height: 4rem;
+  
+  /* Prose colors */
+  --tw-prose-body: theme('colors.neutral.700');
+  --tw-prose-headings: theme('colors.neutral.900');
+  --tw-prose-links: theme('colors.primary.600');
+  --tw-prose-links-hover: theme('colors.primary.700');
+  --tw-prose-quote-borders: theme('colors.primary.300');
+  --tw-prose-quote-bg: theme('colors.primary.50');
+  --tw-prose-code-bg: theme('colors.neutral.100');
+  --tw-prose-pre-bg: theme('colors.neutral.900');
+  
+  /* Shadows Light */
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+  --shadow-medium: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 30px -5px rgba(0, 0, 0, 0.04);
+  --shadow-strong: 0 10px 40px -10px rgba(0, 0, 0, 0.15), 0 20px 50px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Mode Variables */
+.dark {
+  --color-bg-primary: 10 10 11;
+  --color-bg-secondary: 24 24 27;
+  --color-bg-tertiary: 31 31 35;
+  --color-text-primary: 250 250 250;
+  --color-text-secondary: 161 161 170;
+  --color-text-muted: 113 113 122;
+  --color-border: 63 63 70;
+  --color-border-muted: 39 39 42;
+  
+  /* Prose colors dark */
+  --tw-prose-body: theme('colors.neutral.300');
+  --tw-prose-headings: theme('colors.white');
+  --tw-prose-links: theme('colors.primary.400');
+  --tw-prose-links-hover: theme('colors.primary.300');
+  --tw-prose-quote-borders: theme('colors.primary.500');
+  --tw-prose-quote-bg: rgba(14, 165, 233, 0.1);
+  --tw-prose-code-bg: theme('colors.neutral.800');
+  --tw-prose-pre-bg: theme('colors.neutral.950');
+  
+  /* Shadows Dark - subtle glow effect */
+  --shadow-soft: 0 2px 15px -3px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.03);
+  --shadow-medium: 0 4px 25px -5px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --shadow-strong: 0 10px 40px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    @apply bg-neutral-50 dark:bg-neutral-950 text-neutral-900 dark:text-neutral-100;
+    @apply transition-colors duration-300;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  /* Focus visible pour accessibilité */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-primary-500/50 ring-offset-2 dark:ring-offset-neutral-900;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-primary-500/20 text-primary-900 dark:text-primary-100;
+  }
+  
+  /* Scrollbar dark mode */
+  * {
+    scrollbar-color: theme('colors.neutral.400') transparent;
+  }
+  
+  .dark * {
+    scrollbar-color: theme('colors.neutral.600') transparent;
+  }
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+@layer components {
+  /* Titres avec style premium */
+  .heading-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight;
+    @apply text-neutral-900 dark:text-white;
+  }
+  
+  .heading-2 {
+    @apply text-3xl md:text-4xl font-display font-bold tracking-tight;
+    @apply text-neutral-900 dark:text-white;
+  }
+  
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-display font-semibold;
+    @apply text-neutral-900 dark:text-white;
+  }
+  
+  .heading-4 {
+    @apply text-xl md:text-2xl font-semibold;
+    @apply text-neutral-900 dark:text-white;
+  }
+
+  /* Texte body optimisé lecture */
+  .body-text {
+    @apply text-base md:text-lg leading-relaxed;
+    @apply text-neutral-700 dark:text-neutral-300;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary-500 to-accent-500 bg-clip-text text-transparent;
+  }
+  
+  /* Glass effect for dark mode */
+  .glass {
+    @apply bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl;
+    @apply border border-neutral-200 dark:border-neutral-800;
+  }
+  
+  .glass-subtle {
+    @apply bg-white/50 dark:bg-neutral-900/50 backdrop-blur-md;
+  }
+}
+
+/* ============================================
+   CARD STYLES
+   ============================================ */
+
+@layer components {
+  .card {
+    @apply bg-white dark:bg-neutral-900;
+    @apply border border-neutral-100 dark:border-neutral-800;
+    @apply rounded-2xl;
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300;
+    @apply hover:-translate-y-1;
+  }
+  
+  .card-hover:hover {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .card-elevated {
+    @apply bg-white dark:bg-neutral-850;
+    @apply border border-neutral-100 dark:border-neutral-700;
+    box-shadow: var(--shadow-medium);
+  }
+}
+
+/* ============================================
+   ARTICLE PROSE - Dark Mode Optimized
+   ============================================ */
+
+@layer components {
+  .article-content {
+    @apply max-w-none;
+  }
+
+  .article-content h1 {
+    @apply heading-1 mb-6 mt-12 first:mt-0;
+  }
+
+  .article-content h2 {
+    @apply heading-2 mb-4 mt-10 scroll-mt-24;
+  }
+
+  .article-content h3 {
+    @apply heading-3 mb-3 mt-8 scroll-mt-24;
+  }
+
+  .article-content h4 {
+    @apply heading-4 mb-2 mt-6;
+  }
+
+  .article-content p {
+    @apply body-text mb-6;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    @apply my-6 pl-6 space-y-2;
+  }
+
+  .article-content ul {
+    @apply list-disc marker:text-primary-500;
+  }
+
+  .article-content ol {
+    @apply list-decimal marker:text-primary-500;
+  }
+
+  .article-content li {
+    @apply body-text;
+  }
+
+  .article-content a {
+    @apply text-primary-600 dark:text-primary-400 font-medium;
+    @apply underline underline-offset-2 decoration-primary-300 dark:decoration-primary-600;
+    @apply hover:decoration-primary-500 dark:hover:decoration-primary-400 transition-colors;
+  }
+
+  .article-content blockquote {
+    @apply my-8 py-4 px-6 rounded-r-xl;
+    @apply bg-primary-50 dark:bg-primary-950/50 border-l-4 border-primary-500;
+  }
+
+  .article-content blockquote p {
+    @apply text-primary-900 dark:text-primary-100 italic mb-0;
+  }
+
+  .article-content code {
+    @apply px-2 py-1 rounded text-sm font-mono;
+    @apply bg-neutral-100 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200;
+  }
+
+  .article-content pre {
+    @apply my-6 p-6 rounded-2xl overflow-x-auto;
+    @apply bg-neutral-900 dark:bg-neutral-950 border dark:border-neutral-800;
+  }
+
+  .article-content pre code {
+    @apply bg-transparent p-0 text-neutral-100;
+  }
+
+  .article-content img {
+    @apply my-8 rounded-2xl;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .article-content hr {
+    @apply my-12 border-neutral-200 dark:border-neutral-800;
+  }
+
+  .article-content table {
+    @apply my-6 w-full border-collapse;
+  }
+
+  .article-content th {
+    @apply text-left p-3 font-semibold border-b-2;
+    @apply bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100;
+    @apply border-neutral-200 dark:border-neutral-700;
+  }
+
+  .article-content td {
+    @apply p-3 border-b;
+    @apply border-neutral-100 dark:border-neutral-800;
+  }
+
+  .article-content tr:last-child td {
+    @apply border-b-0;
+  }
+
+  .article-content strong {
+    @apply font-semibold text-neutral-900 dark:text-white;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-fade-up {
+    animation: fadeUp 0.5s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.3s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* ============================================
+   SCROLLBAR CUSTOM
+   ============================================ */
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300 dark:bg-neutral-600;
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-400 dark:bg-neutral-500;
+  }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+@layer utilities {
+  /* Container query support */
+  .container-query {
+    container-type: inline-size;
+  }
+
+  /* Line clamp utilities */
+  .line-clamp-1 {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Glow effects for dark mode CTAs */
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+  }
+  
+  .glow-accent {
+    box-shadow: 0 0 20px rgba(217, 70, 239, 0.3);
+  }
+  
+  .dark .glow-primary {
+    box-shadow: 0 0 30px rgba(14, 165, 233, 0.4);
+  }
+  
+  .dark .glow-accent {
+    box-shadow: 0 0 30px rgba(217, 70, 239, 0.4);
+  }
+}
+
+/* ============================================
+   FORM INPUTS DARK MODE
+   ============================================ */
+
+@layer components {
+  .input-base {
+    @apply w-full h-12 px-4 text-base rounded-xl border-2 transition-all duration-200;
+    @apply bg-white dark:bg-neutral-900;
+    @apply border-neutral-200 dark:border-neutral-700;
+    @apply text-neutral-900 dark:text-neutral-100;
+    @apply placeholder:text-neutral-400 dark:placeholder:text-neutral-500;
+    @apply focus:outline-none focus:ring-0;
+    @apply focus:border-primary-500 dark:focus:border-primary-400;
+  }
+  
+  .input-error {
+    @apply border-red-400 dark:border-red-500;
+    @apply bg-red-50/50 dark:bg-red-950/30;
+  }
+  
+  .input-success {
+    @apply border-success-400 dark:border-success-500;
+  }
+}
+
+/* ============================================
+   BUTTONS DARK MODE ENHANCEMENTS
+   ============================================ */
+
+@layer components {
+  .btn-glow {
+    @apply relative overflow-hidden;
+  }
+  
+  .btn-glow::after {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+  }
+  
+  .btn-glow:hover::after {
+    @apply opacity-100;
+  }
+}
